@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="menuCardMaker">
+<head>
+    <meta charset="UTF-8">
+    <title>Menukaarten maker</title>
+</head>
+
+<body>
+    <div>
+
+        <a href="#/">Home</a>
+        <a href="#/about">About</a>
+
+        <div ng-view>
+            <!-- Loads templates in view upon route in URL -->
+        </div>
+
+    </div>
+</body>
+
+<!-- Loading scripts like angular -->
+<script src="js/angular.min.js"></script>
+<script src="js/angular-route.min.js"></script>
+<script src="js/script.js"></script>
+
+</html>
