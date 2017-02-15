@@ -7,15 +7,22 @@
 </head>
 
 <body>
-    <div>
+    <div class="container">
+        <div class="header">
+            Menukaarten
+        </div>
 
-        <a href="#/">Home</a>
-        <a href="#/about">About</a>
+        <nav>
+            <a class="navigation" href="#/"><div class="nav_text">Home</div></a>
+            <a class="navigation" href="#/menus"><div class="nav_text">Menu kaarten</div></a>
+            <a class="navigation" href="#/menuitems"><div class="nav_text">Menu items</div></a>
+            <a class="navigation" href="#/wines"><div class="nav_text">Wijnen</div></a>
+            <a class="navigation" href="#/about"><div class="nav_text">Over</div></a>
+        </nav>
 
         <div ng-view>
             <!-- Loads templates in view upon route in URL -->
         </div>
-
     </div>
 </body>
 

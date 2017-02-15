@@ -10,6 +10,18 @@ app.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'templates/home.html',
             controller: 'HomeController'
         })
+        .when('/menus', {
+            templateUrl: 'templates/menucard.html',
+            controller: 'MenuController'
+        })
+        .when('/menuitems', {
+            templateUrl: 'templates/menuitems.html',
+            controller: 'MenuItemController'
+        })
+        .when('/wines', {
+            templateUrl: 'templates/wine.html',
+            controller: 'WineController'
+        })
         .when('/about', {
             templateUrl: 'templates/about.html',
             controller: 'AboutController'
@@ -24,6 +36,18 @@ app.config(function ($routeProvider, $locationProvider) {
 
 app.controller('HomeController', function ($scope) {
     $scope.message = "HomeController";
+});
+
+app.controller('MenuController', function ($scope) {
+    $scope.message = "MenuController";
+});
+
+app.controller('MenuItemController', function ($scope) {
+    $scope.message = "MenuItemController";
+});
+
+app.controller('WineController', function ($scope) {
+    $scope.message = "WineController";
 });
 
 app.controller('AboutController', function ($scope) {
