@@ -1,0 +1,12 @@
+<div ng-controller="WineController as winePrefs">
+    <h1>Wijn toevoegen</h1>
+
+    <form novalidate ng-submit="winePrefs.saveToStorage()">
+        <label>Naam wijn: <input type="text" ng-model="winePrefs.name"></label> <br>
+        <label>Percentage wijn: <input type="text" ng-model="winePrefs.percentage"></label> <br>
+        <label>Land wijn: <input type="text" ng-model="winePrefs.country"></label> <br>
+        <label>Beschrijving wijn: <input type="text" ng-model="winePrefs.description"></label> <br>
+        <input type="submit" value="Opslaan">
+    </form>
+
+</div>

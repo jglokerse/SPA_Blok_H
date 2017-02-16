@@ -19,7 +19,11 @@ app.config(function ($routeProvider, $locationProvider) {
             controller: 'MenuItemController'
         })
         .when('/wines', {
-            templateUrl: 'templates/wine.html',
+            templateUrl: 'templates/wine/wine.html',
+            controller: 'WineController'
+        })
+        .when('/wines/add', {
+            templateUrl: 'templates/wine/wine_add.html',
             controller: 'WineController'
         })
         .when('/about', {
@@ -46,8 +50,34 @@ app.controller('MenuItemController', function ($scope) {
     $scope.message = "MenuItemController";
 });
 
-app.controller('WineController', function ($scope) {
-    $scope.message = "WineController";
+app.controller('WineController', function () {
+    var winePrefs = this;
+
+    winePrefs.saveToStorage = function () {
+        if (typeof(Storage) !== undefined) {
+
+            winePrefs.wineArr = [];
+            winePrefs.wineArr.push({
+                name:winePrefs.name,
+                percentage:winePrefs.percentage,
+                country:winePrefs.country,
+                description:winePrefs.description
+            });
+
+            if (localStorage.length == 0) {
+                localStorage.setItem("1", JSON.stringify(winePrefs.wineArr));
+            } else {
+                localStorage.setItem((localStorage.length + 1).toString(), JSON.stringify(winePrefs.wineArr));
+            }
+        }
+
+        // Clear form
+        winePrefs.name          = '';
+        winePrefs.percentage    = '';
+        winePrefs.country       = '';
+        winePrefs.description   = '';
+    }
+
 });
 
 app.controller('AboutController', function ($scope) {
