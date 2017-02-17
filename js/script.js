@@ -38,6 +38,36 @@ app.config(function ($routeProvider, $locationProvider) {
     $locationProvider.hashPrefix('');
 });
 
+/////////////////////////////
+//  SERVICES & FACTORIES   //
+/////////////////////////////
+
+app.service('StorageService', function () {
+    this.saveToStorage = function (key, data) {
+        if (typeof(Storage) !== undefined) {
+            if (localStorage.getItem(key) == null) {
+                localStorage.setItem(key, JSON.stringify([data]));
+            } else {
+                var temp = JSON.parse(localStorage.getItem(key)) || [];
+                temp.push(data);
+                localStorage.setItem(key, JSON.stringify(temp));
+            }
+        }
+    }
+});
+
+app.factory('FactoryService', function () {
+    return {
+        getFromStorage: function (id) {
+            return JSON.parse(localStorage.getItem(id));
+        }
+    }
+});
+
+/////////////////
+// CONTROLLERS //
+/////////////////
+
 app.controller('HomeController', function ($scope) {
     $scope.message = "HomeController";
 });
@@ -50,36 +80,30 @@ app.controller('MenuItemController', function ($scope) {
     $scope.message = "MenuItemController";
 });
 
-app.controller('WineController', function () {
+app.controller('WineController', function ($scope, StorageService, FactoryService) {
     var winePrefs = this;
 
-    winePrefs.saveToStorage = function () {
-        if (typeof(Storage) !== undefined) {
-
-            winePrefs.wineArr = [];
-            winePrefs.wineArr.push({
+    winePrefs.save = function () {
+        StorageService.saveToStorage("wine",
+            {
                 name:winePrefs.name,
                 percentage:winePrefs.percentage,
                 country:winePrefs.country,
                 description:winePrefs.description
             });
 
-            if (localStorage.length == 0) {
-                localStorage.setItem("1", JSON.stringify(winePrefs.wineArr));
-            } else {
-                localStorage.setItem((localStorage.length + 1).toString(), JSON.stringify(winePrefs.wineArr));
-            }
-        }
-
         // Clear form
         winePrefs.name          = '';
         winePrefs.percentage    = '';
         winePrefs.country       = '';
         winePrefs.description   = '';
-    }
+    };
 
+    
+    $scope.wijn = FactoryService.getFromStorage("wine");
 });
 
 app.controller('AboutController', function ($scope) {
     $scope.message = "AboutController";
 });
+
