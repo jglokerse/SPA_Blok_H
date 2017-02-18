@@ -60,3 +60,19 @@ a.navigation, a.navigation:visited {
     margin: auto;
     padding: 5px;
 }
+
+table {
+    border-collapse: collapse;
+}
+
+td.head {
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+    width: 150px;
+    padding: 3px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
