@@ -54,8 +54,20 @@ app.service('StorageService', function () {
             } else {
                 // To append new data to existing JSON string in localStorage.
                 var temp = JSON.parse(localStorage.getItem(key)) || [];
+
+                // Get highest ID from the temp array
+                var highestId = null;
+                for (var i = 0; i < temp.length; i ++) {
+                    if (highestId == null || temp[i]['id'] > highestId) {
+                        highestId = temp[i]['id'];
+                    }
+                }
+
+                if (temp.length > 0) {
+                    data['id'] = (parseInt(highestId) + 1).toString();
+                }
+
                 temp.push(data);
-                temp[temp.length - 1]['id'] = (temp.length).toString(); // Update id with the latest unique id.
                 localStorage.setItem(key, JSON.stringify(temp));
             }
         }
@@ -64,14 +76,12 @@ app.service('StorageService', function () {
     this.deleteFromStorage = function (key, id) {
         var fromStorage = JSON.parse(localStorage.getItem(key));
 
-        console.log(id);
-        /*for (var i = 0; i < fromStorage.length; i++) {
+        for (var i = 0; i < fromStorage.length; i++) {
             if (fromStorage[i]['id'] == id) {
-                fromStorage.splice(i, 1);
+                fromStorage.splice(fromStorage.indexOf(fromStorage[i]), 1);
+                localStorage.setItem(key, JSON.stringify(fromStorage));
             }
-        }*/
-
-        localStorage.setItem(key, JSON.stringify(fromStorage));
+        }
     }
 });
 
@@ -99,7 +109,7 @@ app.controller('MenuItemController', function ($scope) {
     $scope.message = "MenuItemController";
 });
 
-app.controller('WineController', function ($scope, $routeParams, StorageService, FactoryService) {
+app.controller('WineController', function ($scope, $routeParams, $timeout, $location, StorageService, FactoryService) {
     var winePrefs = this;
 
     winePrefs.save = function () {
@@ -121,7 +131,11 @@ app.controller('WineController', function ($scope, $routeParams, StorageService,
 
     $scope.winesFromStorage = FactoryService.getFromStorage("wine");
     $scope.remove = function () {
-        StorageService.deleteFromStorage('wine', $routeParams.id);
+        // Timeout because it is too quick to get the id from URL as parameter.
+        $timeout(function () {
+            StorageService.deleteFromStorage('wine', $routeParams.id);
+            $location.path('/wines');
+        }, 100);
     };
 });
 
