@@ -1,5 +1,11 @@
 <div>
-    <h1>Home</h1>
 
-    {{ message }}
+    <label>Voer naam in <input type="text" ng-model="name"></label>
+
+    <div>
+        <h1>Welkom <span ng-bind="name"></span></h1>
+
+        Op deze SPA kan je menukaarten, menu items en wijnen aanmaken en aan elkaar koppelen.
+    </div>
+
 </div>

@@ -30,6 +30,10 @@ app.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'templates/wine/wine.html',
             controller: 'WineController'
         })
+        .when('/wines/edit/:id', {
+            templateUrl: 'templates/wine/wine_edit.html',
+            controller: 'WineController'
+        })
         .when('/about', {
             templateUrl: 'templates/about.html',
             controller: 'AboutController'
@@ -63,6 +67,7 @@ app.service('StorageService', function () {
                     }
                 }
 
+                // Inserts with highestId + 1
                 if (temp.length > 0) {
                     data['id'] = (parseInt(highestId) + 1).toString();
                 }
@@ -89,6 +94,15 @@ app.factory('FactoryService', function () {
     return {
         getFromStorage: function (id) {
             return JSON.parse(localStorage.getItem(id));
+        },
+        
+        getFromStorageById: function (key, id) {
+            var jsonArray = JSON.parse(localStorage.getItem(key)) || [];
+            for (var i = 0; i < jsonArray.length; i++) {
+                if (jsonArray[i]['id'] == id) {
+                    return jsonArray[i];
+                }
+            }
         }
     }
 });
@@ -130,6 +144,8 @@ app.controller('WineController', function ($scope, $routeParams, $timeout, $loca
     };
 
     $scope.winesFromStorage = FactoryService.getFromStorage("wine");
+    $scope.getInfo = FactoryService.getFromStorageById('wine', $routeParams.id);
+
     $scope.remove = function () {
         // Timeout because it is too quick to get the id from URL as parameter.
         $timeout(function () {
@@ -143,3 +159,14 @@ app.controller('AboutController', function ($scope) {
     $scope.message = "AboutController";
 });
 
+/////////////////
+//  OTHER JS   //
+/////////////////
+
+document.getElementById('rotate').addEventListener('click', function () {
+    $('.container').transition({rotate: '180deg'}, 1000);
+
+    setTimeout(function () {
+        $('.container').transition({rotate: '360deg'}, 1000);
+    }, 3000);
+});

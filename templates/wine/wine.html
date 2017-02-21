@@ -9,6 +9,9 @@
     </ul>
 
     <div>
+
+        <label>Zoek wijn via id, naam, percentage, land of omschrijving: <input type="text" ng-model="search"></label>
+
         <table>
             <tr>
                 <td class="head">Naam</td>
@@ -16,13 +19,15 @@
                 <td class="head">Land</td>
                 <td class="head">Omschrijving</td>
                 <td class="head"></td>
+                <td class="head"></td>
             </tr>
-            <tr ng-repeat="wine in winesFromStorage">
+            <tr ng-repeat="wine in winesFromStorage | filter:search">
                 <td>{{ wine.name }}</td>
                 <td>{{ wine.percentage }}</td>
                 <td>{{ wine.country }}</td>
                 <td>{{ wine.description }}</td>
                 <td><a ng-href="#/wines/delete/{{ wine.id }}" ng-click="remove()">verwijderen</a></td>
+                <td><a ng-href="#/wines/edit/{{ wine.id }}" ng-click="getInfo()">aanpassen</a></td>
             </tr>
         </table>
     </div>
