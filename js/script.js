@@ -87,6 +87,10 @@ app.service('StorageService', function () {
                 localStorage.setItem(key, JSON.stringify(fromStorage));
             }
         }
+    };
+    
+    this.updateToStorage = function (key, data) {
+        
     }
 });
 
@@ -124,28 +128,39 @@ app.controller('MenuItemController', function ($scope) {
 });
 
 app.controller('WineController', function ($scope, $routeParams, $timeout, $location, StorageService, FactoryService) {
-    var winePrefs = this;
 
-    winePrefs.save = function () {
+    // CREATE
+    $scope.save = function () {
         StorageService.saveToStorage("wine",
             {
-                id:winePrefs.id = "1",
-                name:winePrefs.name,
-                percentage:winePrefs.percentage,
-                country:winePrefs.country,
-                description:winePrefs.description
+                id:$scope.id = "1",
+                name:$scope.name,
+                percentage:$scope.percentage,
+                country:$scope.country,
+                description:$scope.description
             });
 
         // Clear form
-        winePrefs.name          = '';
-        winePrefs.percentage    = '';
-        winePrefs.country       = '';
-        winePrefs.description   = '';
+        $scope.name          = '';
+        $scope.percentage    = '';
+        $scope.country       = '';
+        $scope.description   = '';
     };
 
-    $scope.winesFromStorage = FactoryService.getFromStorage("wine");
-    $scope.getInfo = FactoryService.getFromStorageById('wine', $routeParams.id);
+    // UPDATE
+    $scope.edit = function () {
+        var wine = {
+            id:$scope.wineById.id,
+            name:$scope.name,
+            percentage:$scope.percentage,
+            country:$scope.country,
+            description:$scope.description
+        };
 
+        console.log(wine)
+    };
+
+    // DELETE
     $scope.remove = function () {
         // Timeout because it is too quick to get the id from URL as parameter.
         $timeout(function () {
@@ -153,6 +168,19 @@ app.controller('WineController', function ($scope, $routeParams, $timeout, $loca
             $location.path('/wines');
         }, 100);
     };
+
+    $scope.cancel = function () {
+        $location.path('/wines');
+    };
+
+    // READ
+    $scope.winesFromStorage = FactoryService.getFromStorage("wine");
+
+    $timeout(function () {
+        $scope.wineById = FactoryService.getFromStorageById('wine', $routeParams.id);
+    });
+
+
 });
 
 app.controller('AboutController', function ($scope) {
