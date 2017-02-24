@@ -89,8 +89,19 @@ app.service('StorageService', function () {
         }
     };
     
-    this.updateToStorage = function (key, data) {
-        
+    this.updateStorage = function (key, id, data) {
+        var fromStorage = JSON.parse(localStorage.getItem(key));
+
+        for (var i = 0; i < fromStorage.length; i++) {
+            if(fromStorage[i]['id'] == id) {
+                var jsonKeys = Object.keys(fromStorage[i]);
+                for (var x = 1; x < jsonKeys.length; x++) {
+                    fromStorage[i][jsonKeys[x]] = data[jsonKeys[x]];
+                }
+            }
+        }
+
+        localStorage.setItem(key, JSON.stringify(fromStorage));
     }
 });
 
@@ -157,7 +168,7 @@ app.controller('WineController', function ($scope, $routeParams, $timeout, $loca
             description:$scope.description
         };
 
-        console.log(wine)
+        StorageService.updateStorage('wine', $scope.wineById.id, wine);
     };
 
     // DELETE
