@@ -2,7 +2,7 @@
  * Created by John on 06/03/2017.
  */
 
-var c = angular.module('appControllers', ['appServices']);
+var c = angular.module('appControllers', ['appServices', 'appFilters']);
 
 c.controller('HomeController', function ($scope) {
     $scope.message = "HomeController";

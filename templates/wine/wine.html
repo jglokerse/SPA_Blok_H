@@ -23,7 +23,7 @@
             </tr>
             <tr ng-repeat="wine in winesFromStorage | filter:search">
                 <td>{{ wine.name }}</td>
-                <td>{{ wine.percentage }}</td>
+                <td>{{ wine.percentage | addPercent }}</td>
                 <td>{{ wine.country }}</td>
                 <td>{{ wine.description }}</td>
                 <td><a ng-href="#/wines/delete/{{ wine.id }}" ng-click="remove()">verwijderen</a></td>
