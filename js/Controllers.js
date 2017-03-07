@@ -34,19 +34,13 @@ c.controller('WineController', function ($scope, $routeParams, $timeout, $locati
         $scope.percentage    = '';
         $scope.country       = '';
         $scope.description   = '';
+        $location.path('/wines');
     };
 
     // UPDATE
     $scope.edit = function () {
-        var wine = {
-            id:$scope.wineById.id,
-            name:$scope.name,
-            percentage:$scope.percentage,
-            country:$scope.country,
-            description:$scope.description
-        };
-
-        StorageService.updateStorage('wine', $scope.wineById.id, wine);
+        StorageService.updateStorage('wine', $scope.wineById.id, $scope.wineById);
+        $location.path('/wines');
     };
 
     // DELETE

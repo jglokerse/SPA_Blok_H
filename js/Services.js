@@ -45,7 +45,7 @@ services.service('StorageService', function () {
 
     this.updateStorage = function (key, id, data) {
         var fromStorage = JSON.parse(localStorage.getItem(key));
-
+        
         for (var i = 0; i < fromStorage.length; i++) {
             if(fromStorage[i]['id'] == id) {
                 var jsonKeys = Object.keys(fromStorage[i]);
