@@ -6,6 +6,12 @@ var filters = angular.module('appFilters', []);
 
 filters.filter('addPercent', function () {
     return function (input) {
-        return input + "%";
+
+        if (input == undefined) {
+            return "%";
+        } else {
+            return input + "%";
+        }
+
     }
 });

@@ -1,0 +1,23 @@
+{
+  "name": "spa_blok_h",
+  "version": "1.0.0",
+  "description": "Single Page Application ~ The Hague University course H",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "karma start test/karma.conf.js",
+    "start": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jglokerse/SPA_Blok_H.git"
+  },
+  "author": "John Lokerse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jglokerse/SPA_Blok_H/issues"
+  },
+  "homepage": "https://github.com/jglokerse/SPA_Blok_H#readme"
+}
