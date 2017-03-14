@@ -3,7 +3,3 @@
  */
 
 var d = angular.module('appDirectives', []);
-
-d.directive('roteer', function () {
-    
-})
