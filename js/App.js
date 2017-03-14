@@ -8,7 +8,8 @@ app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'templates/home.html',
-            controller: 'HomeController'
+            controller: 'HomeController',
+            name: 'home'
         })
         .when('/menus', {
             templateUrl: 'templates/menucard.html',
