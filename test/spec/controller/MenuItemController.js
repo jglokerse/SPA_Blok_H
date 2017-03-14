@@ -2,7 +2,7 @@
  * Created by john on 14/03/2017.
  */
 
-describe('Controller: HomeController via TDD', function () {
+describe('Controller: MenuItemController via TDD', function () {
 
     var mockService;
     var scope;
