@@ -5,9 +5,11 @@
     <form novalidate ng-submit="save()">
         <label>Naam menu item: <input type="text" ng-model="name"></label> <br>
         <label>Prijs menu item: <input type="text" ng-model="price"></label> <br>
+        <label> <input type="checkbox" ng-model="checked"> Wijn toevoegen bij dit menu item? </label> <br>
 
-        <label> Selecteer een wijn:
-            <select ng-model="wine"ng-options="wine.name for wine in wines track by wine.id">
+
+        <label ng-show="checked"> Selecteer een wijn:
+            <select ng-model="wine" ng-options="wine.name for wine in wines track by wine.id">
                 <option value="">--- Voeg een wijn toe ---</option>
             </select>
         </label> <br>

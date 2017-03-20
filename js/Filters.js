@@ -15,3 +15,15 @@ filters.filter('addPercent', function () {
 
     }
 });
+
+filters.filter('addEuroSign', function () {
+    return function (input) {
+
+        if (input == undefined) {
+            return "€"
+        } else {
+            return "€" + input;
+        }
+
+    }
+});

@@ -20,7 +20,7 @@
             </tr>
             <tr ng-repeat="menuItem in menuItemsFromStorage | filter:search">
                 <td>{{ menuItem.name }}</td>
-                <td>{{ menuItem.price }}</td>
+                <td>{{ menuItem.price | addEuroSign }}</td>
                 <td>{{ menuItem.wine }}</td>
                 <td><a ng-href="#/menuitems/delete/{{ menuItem.id }}" ng-click="remove()">verwijderen</a></td>
                 <td><a ng-href="#/menuitems/edit/{{ menuItem.id }}">aanpassen</a></td>

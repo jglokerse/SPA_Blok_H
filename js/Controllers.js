@@ -16,6 +16,14 @@ c.controller('MenuItemController', function ($scope, $routeParams, $timeout, $lo
 
     // CREATE
     $scope.save = function () {
+
+        if ($scope.wine === undefined) {
+            $scope.wine = {
+                id:-1,
+                name:"Geen"
+            }
+        }
+
         StorageService.saveToStorage("menuItem",
             {
                 id:$scope.id = "1",
@@ -31,6 +39,11 @@ c.controller('MenuItemController', function ($scope, $routeParams, $timeout, $lo
 
     // UPDATE
     $scope.edit = function () {
+
+        if ($scope.menuItemById.wine === null) {
+            $scope.menuItemById.wine = "Geen"
+        }
+
         StorageService.updateStorage('menuItem', $scope.menuItemById.id, $scope.menuItemById);
         $location.path('/menuitems')
     };
@@ -56,6 +69,7 @@ c.controller('MenuItemController', function ($scope, $routeParams, $timeout, $lo
         $scope.menuItemById = FactoryService.getFromStorageById('menuItem', $routeParams.id);
     });
 
+    // Data for the dropdownlist
     $scope.wines = FactoryService.getFromStorage('wine');
 
 });
