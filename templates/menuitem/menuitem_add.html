@@ -1,0 +1,19 @@
+<div>
+
+    <h1>Menu Item toevoegen</h1>
+
+    <form novalidate ng-submit="save()">
+        <label>Naam menu item: <input type="text" ng-model="name"></label> <br>
+        <label>Prijs menu item: <input type="text" ng-model="price"></label> <br>
+
+        <label> Selecteer een wijn:
+            <select ng-model="wine"ng-options="wine.name for wine in wines track by wine.id">
+                <option value="">--- Voeg een wijn toe ---</option>
+            </select>
+        </label> <br>
+
+        <input type="submit" value="Opslaan">
+        <input type="button" value="Annuleren" ng-click="cancel()">
+    </form>
+
+</div>

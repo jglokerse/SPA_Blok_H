@@ -90,6 +90,11 @@ describe('Service: StorageService', function () {
 
         service.saveToStorage('test', input);
         service.saveToStorage('test', input2);
+
+        spyOn(window, 'confirm').and.callFake(function () {
+            return true;
+        });
+
         service.deleteFromStorage('test', '2516');
 
         expect(JSON.parse(localStorage.getItem('test')).length).toEqual(expectedSize);

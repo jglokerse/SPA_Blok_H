@@ -4,7 +4,7 @@
 
 var services = angular.module('appServices', []);
 
-services.service('StorageService', function ($window) {
+services.service('StorageService', function () {
     this.saveToStorage = function (key, data) {
         if (typeof(Storage) !== undefined) {
             if (localStorage.getItem(key) == null) {

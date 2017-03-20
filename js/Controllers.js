@@ -12,11 +12,55 @@ c.controller('MenuController', function ($scope) {
     $scope.message = "MenuController";
 });
 
-c.controller('MenuItemController', function ($scope) {
-    $scope.message = "MenuItemController";
+c.controller('MenuItemController', function ($scope, $routeParams, $timeout, $location, $window, StorageService, FactoryService) {
+
+    // CREATE
+    $scope.save = function () {
+        StorageService.saveToStorage("menuItem",
+            {
+                id:$scope.id = "1",
+                name:$scope.name,
+                price:$scope.price,
+                wine:$scope.wine.name
+            });
+
+        $scope.name     = '';
+        $scope.price    = '';
+        $location.path('/menuitems');
+    };
+
+    // UPDATE
+    $scope.edit = function () {
+        StorageService.updateStorage('menuItem', $scope.menuItemById.id, $scope.menuItemById);
+        $location.path('/menuitems')
+    };
+
+    // DELETE
+    $scope.remove = function () {
+        if ($window.confirm("Weet je zeker dat je dit wil verwijderen?")) {
+            $timeout(function () {
+                StorageService.deleteFromStorage('menuItem', $routeParams.id);
+                $location.path('/menuitems');
+            });
+        }
+    };
+
+    $scope.cancel = function () {
+        $location.path('/menuitems')
+    };
+
+    // READ
+    $scope.menuItemsFromStorage = FactoryService.getFromStorage('menuItem');
+
+    $timeout(function () {
+        $scope.menuItemById = FactoryService.getFromStorageById('menuItem', $routeParams.id);
+    });
+
+    $scope.wines = FactoryService.getFromStorage('wine');
+
 });
 
-c.controller('WineController', function ($scope, $routeParams, $timeout, $location, StorageService, FactoryService) {
+c.controller('WineController', function ($scope, $routeParams, $timeout, $location, $window, StorageService, FactoryService) {
 
     // CREATE
     $scope.save = function () {
@@ -46,10 +90,12 @@ c.controller('WineController', function ($scope, $routeParams, $timeout, $locati
     // DELETE
     $scope.remove = function () {
         // Timeout because it is too quick to get the id from URL as parameter.
-        $timeout(function () {
-            StorageService.deleteFromStorage('wine', $routeParams.id);
-            $location.path('/wines');
-        }, 100);
+        if ($window.confirm("Weet je zeker dat je dit wil verwijderen?")) {
+            $timeout(function () {
+                StorageService.deleteFromStorage('wine', $routeParams.id);
+                $location.path('/wines');
+            }, 100);
+        }
     };
 
     $scope.cancel = function () {
@@ -62,7 +108,6 @@ c.controller('WineController', function ($scope, $routeParams, $timeout, $locati
     $timeout(function () {
         $scope.wineById = FactoryService.getFromStorageById('wine', $routeParams.id);
     });
-
 
 });
 

@@ -16,7 +16,19 @@ app.config(function ($routeProvider, $locationProvider) {
             controller: 'MenuController'
         })
         .when('/menuitems', {
-            templateUrl: 'templates/menuitems.html',
+            templateUrl: 'templates/menuitem/menuitems.html',
+            controller: 'MenuItemController'
+        })
+        .when('/menuitems/add', {
+            templateUrl: 'templates/menuitem/menuitem_add.html',
+            controller: 'MenuItemController'
+        })
+        .when('/menuitems/delete/:id', {
+            templateUrl: 'templates/menuitem/menuitems.html',
+            controller: 'MenuItemController'
+        })
+        .when('/menuitems/edit/:id', {
+            templateUrl: 'templates/menuitem/menuitem_edit.html',
             controller: 'MenuItemController'
         })
         .when('/wines', {

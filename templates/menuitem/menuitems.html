@@ -1,0 +1,31 @@
+<div>
+    <h1>Menu Items</h1>
+
+    <ul>
+        <li><a href="#/menuitems/add">Menu Item toevoegen</a> </li>
+    </ul>
+
+    <div>
+        <label>Zoek een menu item via id, naam, prijs of wijn: <input type="text" placeholder="Zoeken" ng-model="search"></label>
+        <br>
+        <br>
+
+        <table>
+            <tr>
+                <td class="head">Naam</td>
+                <td class="head">Prijs</td>
+                <td class="head">Wijn</td>
+                <td class="head"></td>
+                <td class="head"></td>
+            </tr>
+            <tr ng-repeat="menuItem in menuItemsFromStorage | filter:search">
+                <td>{{ menuItem.name }}</td>
+                <td>{{ menuItem.price }}</td>
+                <td>{{ menuItem.wine }}</td>
+                <td><a ng-href="#/menuitems/delete/{{ menuItem.id }}" ng-click="remove()">verwijderen</a></td>
+                <td><a ng-href="#/menuitems/edit/{{ menuItem.id }}">aanpassen</a></td>
+            </tr>
+        </table>
+    </div>
+
+</div>
