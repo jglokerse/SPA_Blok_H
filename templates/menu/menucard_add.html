@@ -1,0 +1,17 @@
+<div>
+
+    <h1>Menukaart maken</h1>
+
+    <form novalidate ng-submit="save()">
+        <label>Naam menukaart: <input type="text" ng-model="name"></label> <br>
+
+        <div ng-repeat="menuitem in menuitems">
+            <label><input type="checkbox" value="{{ menuitem }}"> <b>Menu item</b>: {{ menuitem.name }} <b>Wijn</b>: {{ menuitem.wine }}</label>
+            <br>
+        </div>
+
+        <input type="submit" value="Opslaan">
+        <input type="button" value="Annuleren" ng-click="cancel()">
+    </form>
+
+</div>

@@ -8,8 +8,14 @@ c.controller('HomeController', function ($scope) {
     $scope.message = "HomeController";
 });
 
-c.controller('MenuController', function ($scope) {
+c.controller('MenuController', function ($scope, $location, FactoryService) {
     $scope.message = "MenuController";
+
+    $scope.cancel = function () {
+        $location.path('/menus')
+    };
+
+    $scope.menuitems = FactoryService.getFromStorage("menuItem");
 });
 
 c.controller('MenuItemController', function ($scope, $routeParams, $timeout, $location, $window, StorageService, FactoryService) {
@@ -39,7 +45,6 @@ c.controller('MenuItemController', function ($scope, $routeParams, $timeout, $lo
 
     // UPDATE
     $scope.edit = function () {
-
         if ($scope.menuItemById.wine === null) {
             $scope.menuItemById.wine = "Geen"
         }

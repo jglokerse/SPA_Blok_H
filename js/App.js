@@ -12,7 +12,11 @@ app.config(function ($routeProvider, $locationProvider) {
             name: 'home'
         })
         .when('/menus', {
-            templateUrl: 'templates/menucard.html',
+            templateUrl: 'templates/menu/menucard.html',
+            controller: 'MenuController'
+        })
+        .when('/menus/add', {
+            templateUrl: 'templates/menu/menucard_add.html',
             controller: 'MenuController'
         })
         .when('/menuitems', {
