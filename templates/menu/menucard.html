@@ -5,4 +5,20 @@
         <li> <a href="#/menus/add">Menukaart maken</a></li>
     </ul>
 
+    <label>Zoek menukaart via naam: <input type="text" placeholder="Zoeken" ng-model="search"></label>
+    <br>
+    <br>
+    <table>
+        <tr>
+            <td class="head">Naam kaart</td>
+            <td class="head"></td>
+            <td class="head"></td>
+        </tr>
+        <tr ng-repeat="menucard in menucards | filter:search">
+            <td>{{ menucard.name }}</td>
+            <td><a href="#/menus/delete/{{ menucard.id }}" ng-click="remove()">verwijderen</a></td>
+            <td><a href="#/menus/edit/{{ menucard.id }}">aanpassen</a></td>
+        </tr>
+    </table>
+
 </div>

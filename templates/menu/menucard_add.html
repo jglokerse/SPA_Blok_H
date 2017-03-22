@@ -6,7 +6,11 @@
         <label>Naam menukaart: <input type="text" ng-model="name"></label> <br>
 
         <div ng-repeat="menuitem in menuitems">
-            <label><input type="checkbox" value="{{ menuitem }}"> <b>Menu item</b>: {{ menuitem.name }} <b>Wijn</b>: {{ menuitem.wine }}</label>
+            <label><input type="checkbox"
+                          name="selectedItem[]"
+                          value="{{ menuitem }}"
+                          ng-click="toggleSelection(menuitem)"
+                          ng-false-value="removeSelection(menuitem)"> <b>Menu item</b>: {{ menuitem.name }} <b>Wijn</b>: {{ menuitem.wine }}</label>
             <br>
         </div>
 

@@ -8,12 +8,49 @@ c.controller('HomeController', function ($scope) {
     $scope.message = "HomeController";
 });
 
-c.controller('MenuController', function ($scope, $location, FactoryService) {
+c.controller('MenuController', function ($scope, $location, $routeParams, $window, $timeout, StorageService, FactoryService) {
     $scope.message = "MenuController";
+    
+    $scope.selection = [];
 
+    $scope.toggleSelection = function toggleSelection (menuItem) {
+        if ($scope.selection.indexOf(menuItem) === -1) {
+            $scope.selection.push(menuItem);
+        } else {
+            var index = $scope.selection.indexOf(menuItem);
+            $scope.selection.splice(index, 1)
+        }
+    };
+
+    $scope.save = function () {
+        StorageService.saveToStorage('menuCard',
+            {
+                id:$scope.id = "1",
+                name:$scope.name,
+                items:$scope.selection
+            });
+
+        $location.path('/menus');
+    };
+    
+    $scope.remove = function () {
+        if ($window.confirm("Weet je zeker dat je dit wil verwijderen?")) {
+                $timeout(function () {
+                    StorageService.deleteFromStorage('menuCard', $routeParams.id);
+                    $location.path('/menus');
+                })
+        }
+    };
+    
     $scope.cancel = function () {
         $location.path('/menus')
     };
+
+    $scope.menucards = FactoryService.getFromStorage('menuCard');
+
+    $timeout(function () {
+        $scope.menucardById = FactoryService.getFromStorageById('menucard', $routeParams.id);
+    });
 
     $scope.menuitems = FactoryService.getFromStorage("menuItem");
 });
