@@ -12,14 +12,43 @@ c.controller('MenuController', function ($scope, $location, $routeParams, $windo
     $scope.message = "MenuController";
     
     $scope.selection = [];
+    $scope.geklooi = {};
 
     $scope.toggleSelection = function toggleSelection (menuItem) {
         if ($scope.selection.indexOf(menuItem) === -1) {
+            delete menuItem.$$hashKey;
             $scope.selection.push(menuItem);
         } else {
             var index = $scope.selection.indexOf(menuItem);
-            $scope.selection.splice(index, 1)
+            $scope.selection.splice(index, 1);
         }
+    };
+
+    $scope.fillSelection = function (id) {
+
+        // TODO: Vergelijken op JSON objecten niveau......
+
+        var blaat = FactoryService.getFromStorageById('menuCard', id);
+        $scope.selection.push(blaat.items[0]);
+
+        for (var x = 0; x < $scope.menuitems.length; x++) {
+            for(var y = 0; y < $scope.selection.length; y++) {
+                if (JSON.stringify($scope.selection[y]) !== JSON.stringify($scope.menuitems[x])){
+                    console.log($scope.menuitems[x]);
+                }
+            }
+
+        }
+
+        for (var i = 0; i < blaat.items.length; i++) {
+            if ($scope.selection.indexOf(blaat.items)){
+                blaat.items[i].checked = true;
+            }
+        }
+
+        // TODO: Pushen naar $scope.geklooi en aanroepen voor een vinkje in HTML.
+
+        $scope.geklooi = blaat;
     };
 
     $scope.save = function () {
@@ -35,13 +64,18 @@ c.controller('MenuController', function ($scope, $location, $routeParams, $windo
     
     $scope.remove = function () {
         if ($window.confirm("Weet je zeker dat je dit wil verwijderen?")) {
-                $timeout(function () {
-                    StorageService.deleteFromStorage('menuCard', $routeParams.id);
-                    $location.path('/menus');
-                })
+            $timeout(function () {
+                StorageService.deleteFromStorage('menuCard', $routeParams.id);
+                $location.path('/menus');
+            })
         }
     };
-    
+
+    $scope.edit = function () {
+        $scope.menucardById.items = $scope.selection;
+        StorageService.updateStorage('menuCard', $scope.menucardById.id, $scope.menucardById);
+    };
+
     $scope.cancel = function () {
         $location.path('/menus')
     };
@@ -49,7 +83,7 @@ c.controller('MenuController', function ($scope, $location, $routeParams, $windo
     $scope.menucards = FactoryService.getFromStorage('menuCard');
 
     $timeout(function () {
-        $scope.menucardById = FactoryService.getFromStorageById('menucard', $routeParams.id);
+        $scope.menucardById = FactoryService.getFromStorageById('menuCard', $routeParams.id);
     });
 
     $scope.menuitems = FactoryService.getFromStorage("menuItem");
@@ -117,7 +151,7 @@ c.controller('MenuItemController', function ($scope, $routeParams, $timeout, $lo
 });
 
 c.controller('WineController', function ($scope, $routeParams, $timeout, $location, $window, StorageService, FactoryService) {
-
+    
     // CREATE
     $scope.save = function () {
         StorageService.saveToStorage("wine",

@@ -6,6 +6,13 @@
         <label><h1>ID: {{ menucardById.id }}</h1></label>
         <label>Naam menukaart: <input type="text" ng-model="menucardById.name"></label> <br>
 
-    </form>
+        <div ng-repeat="menuitem in menuitems">
+            <label><input type="checkbox" value="{{ menuitem }}" ng-click="toggleSelection(menuitem)" ng-true-value="selection.checked">  <b>Menu item</b>: {{ menuitem.name }} <b>Wijn</b>: {{ menuitem.wine }}</label>
+            <br>
+        </div>
 
+        <input type="submit" value="Aanpassen">
+        <input type="button" value="Annuleren" ng-click="cancel()">
+
+    </form>
 </div>

@@ -17,7 +17,7 @@
         <tr ng-repeat="menucard in menucards | filter:search">
             <td>{{ menucard.name }}</td>
             <td><a href="#/menus/delete/{{ menucard.id }}" ng-click="remove()">verwijderen</a></td>
-            <td><a href="#/menus/edit/{{ menucard.id }}">aanpassen</a></td>
+            <td><a href="#/menus/edit/{{ menucard.id }}" ng-click="fillSelection(menucard.id)">aanpassen</a></td>
         </tr>
     </table>
 
