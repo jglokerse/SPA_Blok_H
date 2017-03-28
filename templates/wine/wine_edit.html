@@ -2,14 +2,14 @@
 
     <h1>Wijn aanpassen</h1>
 
-    <form novalidate ng-submit="edit()">
+    <form novalidate ng-submit="edit()" name="wineEditForm">
             <label><h1>ID: {{ wineById.id }}</h1></label>
-            <label>Naam wijn: <input type="text" ng-model="wineById.name"></label> <br>
-            <label>Percentage wijn: <input type="text" ng-model="wineById.percentage"></label> <br>
-            <label>Land wijn: <input type="text" ng-model="wineById.country"></label> <br>
-            <label>Omschrijving wijn: <input type="text" ng-model="wineById.description"></label> <br>
+            <label>Naam wijn: <input type="text" ng-model="wineById.name" ng-required="true"></label> <br>
+            <label>Percentage wijn: <input type="text" ng-model="wineById.percentage" ng-required="true"></label> <br>
+            <label>Land wijn: <input type="text" ng-model="wineById.country" ng-required="true"></label> <br>
+            <label>Omschrijving wijn: <input type="text" ng-model="wineById.description" ng-required="true"></label> <br>
 
-            <input type="submit" value="Aanpassen">
+            <input type="submit" value="Aanpassen" ng-disabled="wineEditForm.$invalid">
             <input type="button" value="Annuleren" ng-click="cancel()">
     </form>
 

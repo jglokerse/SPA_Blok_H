@@ -2,10 +2,10 @@
 
     <h1>Menu Item aanpassen</h1>
 
-    <form novalidate ng-submit="edit()">
+    <form novalidate ng-submit="edit()" name="menuItemEditForm">
         <label><h1>ID: {{ menuItemById.id }}</h1></label>
-        <label>Naam menu item: <input type="text" ng-model="menuItemById.name"></label> <br>
-        <label>Prijs menu item: <input type="text" ng-model="menuItemById.price"></label> <br>
+        <label>Naam menu item: <input type="text" ng-model="menuItemById.name" ng-required="true"></label> <br>
+        <label>Prijs menu item: <input type="text" ng-model="menuItemById.price" ng-required="true"></label> <br>
         <label>Wijn voor menu item:
 
             <select ng-model="menuItemById.wine" ng-options="wine.name as wine.name for wine in wines">
@@ -14,7 +14,7 @@
 
         </label><br>
 
-        <input type="submit" value="Aanpassen">
+        <input type="submit" value="Aanpassen" ng-disabled="menuItemEditForm.$invalid">
         <input type="button" value="Annuleren" ng-click="cancel()">
     </form>
 

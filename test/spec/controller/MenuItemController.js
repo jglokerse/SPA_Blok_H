@@ -2,7 +2,11 @@
  * Created by john on 14/03/2017.
  */
 
-describe('Controller: MenuItemController via TDD', function () {
+/**
+ * Niet meer van toepassing.
+ */
+
+/*describe('Controller: MenuItemController via TDD', function () {
 
     var mockService;
     var scope;
@@ -42,9 +46,9 @@ describe('Controller: MenuItemController via TDD', function () {
         scope.menuItem = {
             id: '1',
             name: "Kabeljauw",
-            price: "15 euro",
+            price: "15",
             wine: [
-                {id: "14", name: "Bordeaux Du Speciale", percentage: "13%", country: "Frankrijk", description: "Heerlijk bij vis"}
+                {id: "14", name: "Bordeaux Du Speciale", percentage: "13", country: "Frankrijk", description: "Heerlijk bij vis"}
                 ]
         };
 
@@ -66,3 +70,4 @@ describe('Controller: MenuItemController via TDD', function () {
     })
 
 });
+    */

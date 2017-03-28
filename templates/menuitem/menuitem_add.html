@@ -2,9 +2,9 @@
 
     <h1>Menu Item toevoegen</h1>
 
-    <form novalidate ng-submit="save()">
-        <label>Naam menu item: <input type="text" ng-model="name"></label> <br>
-        <label>Prijs menu item: <input type="text" ng-model="price"></label> <br>
+    <form novalidate ng-submit="save()" name="menuItemForm">
+        <label>Naam menu item: <input type="text" ng-model="name" ng-required="true"></label> <br>
+        <label>Prijs menu item: <input type="number" ng-model="price" ng-required="true"></label> <br>
         <label> <input type="checkbox" ng-model="checked"> Wijn toevoegen bij dit menu item? </label> <br>
 
 
@@ -14,7 +14,7 @@
             </select>
         </label> <br>
 
-        <input type="submit" value="Opslaan">
+        <input type="submit" value="Opslaan" ng-disabled="menuItemForm.$invalid">
         <input type="button" value="Annuleren" ng-click="cancel()">
     </form>
 

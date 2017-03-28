@@ -1,13 +1,13 @@
 <div>
     <h1>Wijn toevoegen</h1>
 
-    <form novalidate ng-submit="save()">
-        <label>Naam wijn: <input type="text" ng-model="name"></label> <br>
-        <label>Percentage wijn: <input type="text" ng-model="percentage"></label> <br>
-        <label>Land wijn: <input type="text" ng-model="country"></label> <br>
-        <label>Beschrijving wijn: <input type="text" ng-model="description"></label> <br>
+    <form novalidate ng-submit="save()" name="wineForm">
+        <label>Naam wijn: <input type="text" ng-model="name" ng-required="true"></label> <br>
+        <label>Percentage wijn: <input type="number" ng-model="percentage" ng-required="true"></label> <br>
+        <label>Land wijn: <input type="text" ng-model="country" ng-required="true"></label> <br>
+        <label>Beschrijving wijn: <input type="text" ng-model="description" ng-required="true"></label> <br>
 
-        <input id="sbmt" type="submit" value="Opslaan">
+        <input id="sbmt" type="submit" value="Opslaan" ng-disabled="wineForm.$invalid">
         <input type="button" value="Annuleren" ng-click="cancel()">
     </form>
 
